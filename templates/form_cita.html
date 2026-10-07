@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Nueva Cita</h2>
+<div class="card p-4 shadow-sm" style="max-width: 500px;">
+    <form method="POST">
+        <div class="mb-3">
+            <label class="form-label">Fecha</label>
+            <input type="date" name="fecha" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Cliente</label>
+            <select name="cliente_id" class="form-select" required>
+                <option value=""></option>
+                {% for cli in clientes %}
+                <option value="{{ cli.id }}">{{ cli.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Servicio</label>
+            <select name="servicio_id" class="form-select" required>
+                <option value=""></option>
+                {% for ser in servicios %}
+                <option value="{{ ser.id }}">{{ ser.nombre }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <a href="{{ url_for('citas') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
