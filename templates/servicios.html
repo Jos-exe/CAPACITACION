@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-3">Servicios</h1>
+
+    <a href="{{ url_for('nuevo_servicio') }}" class="btn btn-success mb-3">Nuevo Servicio</a>
+
+    <table class="table table-striped table-bordered align-middle shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for servicio in servicios %}
+            <tr>
+                <td>{{ servicio.id }}</td>
+                <td>{{ servicio.nombre }}</td>
+                <td>Bs{{ servicio.precio }}</td>
+                <td>
+                    <a href="{{ url_for('editar_servicio', id=servicio.id) }}" class="btn btn-warning btn-sm">Editar</a>
+                    <a href="{{ url_for('eliminar_servicio', id=servicio.id) }}" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de eliminar este servicio?');">Eliminar</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" class="text-center text-muted">No hay servicios registrados todavía.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
